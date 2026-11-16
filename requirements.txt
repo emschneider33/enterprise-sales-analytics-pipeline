@@ -1,0 +1,6 @@
+Faker==40.44.0
+pandas==3.0.5
+PyMySQL==1.2.3
+python-dotenv==1.2.4
+snowflake-connector-python[pandas]==5.2.0
+SQLAlchemy==2.1.6

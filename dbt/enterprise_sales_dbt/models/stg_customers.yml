@@ -1,0 +1,23 @@
+
+version: 2
+
+models:
+  - name: stg_customers
+    description: "Cleaned and standardized customer data."
+
+    columns:
+      - name: CUSTOMER_ID
+        data_tests:
+          - unique
+          - not_null
+
+      - name: CUSTOMER_NAME
+        data_tests:
+          - not_null
+
+      - name: SALES_REP_ID
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('stg_sales_reps')
+              field: SALES_REP_ID

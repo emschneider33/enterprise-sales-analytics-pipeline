@@ -1,0 +1,10 @@
+enterprise_sales_dbt:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      role: ACCOUNTADMIN
+      warehouse: SALES_ANALYTICS_WH
+      database: ENTERPRISE_SALES_DW
+      schema: STAGING
+      threads: 8

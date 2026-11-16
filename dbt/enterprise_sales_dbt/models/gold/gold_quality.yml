@@ -1,0 +1,86 @@
+
+version: 2
+
+models:
+
+  # ========================================
+  # CUSTOMER DIMENSION
+  # ========================================
+  - name: dim_customer
+    columns:
+      - name: CUSTOMER_ID
+        data_tests:
+          - unique
+          - not_null
+
+  # ========================================
+  # PRODUCT DIMENSION
+  # ========================================
+  - name: dim_product
+    columns:
+      - name: PRODUCT_ID
+        data_tests:
+          - unique
+          - not_null
+
+  # ========================================
+  # SALES REPRESENTATIVE DIMENSION
+  # ========================================
+  - name: dim_sales_rep
+    columns:
+      - name: SALES_REP_ID
+        data_tests:
+          - unique
+          - not_null
+
+  # ========================================
+  # DATE DIMENSION
+  # ========================================
+  - name: dim_date
+    columns:
+      - name: DATE_KEY
+        data_tests:
+          - unique
+          - not_null
+
+      - name: CALENDAR_DATE
+        data_tests:
+          - unique
+
+  # ========================================
+  # SALES FACT TABLE
+  # ========================================
+  - name: fact_sales
+    columns:
+      - name: ORDER_ITEM_ID
+        data_tests:
+          - unique
+          - not_null
+
+      - name: CUSTOMER_ID
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('dim_customer')
+              field: CUSTOMER_ID
+
+      - name: PRODUCT_ID
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('dim_product')
+              field: PRODUCT_ID
+
+      - name: SALES_REP_ID
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('dim_sales_rep')
+              field: SALES_REP_ID
+
+      - name: DATE_KEY
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('dim_date')
+              field: DATE_KEY

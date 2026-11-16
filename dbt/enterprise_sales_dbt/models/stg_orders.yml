@@ -1,0 +1,21 @@
+
+version: 2
+
+models:
+  - name: stg_orders
+    description: "Cleaned and standardized sales orders from RAW."
+
+    columns:
+      - name: ORDER_ID
+        description: "Unique identifier for each sales order."
+        data_tests:
+          - unique
+          - not_null
+
+      - name: CUSTOMER_ID
+        description: "Customer associated with the order."
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('stg_customers')
+              field: CUSTOMER_ID

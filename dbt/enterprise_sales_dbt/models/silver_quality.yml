@@ -1,0 +1,82 @@
+
+version: 2
+
+models:
+
+  # ==========================================
+  # TERRITORIES
+  # ==========================================
+  - name: stg_territories
+    columns:
+      - name: TERRITORY_ID
+        data_tests:
+          - unique
+          - not_null
+
+  # ==========================================
+  # SALES REPRESENTATIVES
+  # ==========================================
+  - name: stg_sales_reps
+    columns:
+      - name: SALES_REP_ID
+        data_tests:
+          - unique
+          - not_null
+
+      - name: TERRITORY_ID
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('stg_territories')
+              field: TERRITORY_ID
+
+  # ==========================================
+  # PRODUCT CATEGORIES
+  # ==========================================
+  - name: stg_product_categories
+    columns:
+      - name: CATEGORY_ID
+        data_tests:
+          - unique
+          - not_null
+
+  # ==========================================
+  # PRODUCTS
+  # ==========================================
+  - name: stg_products
+    columns:
+      - name: PRODUCT_ID
+        data_tests:
+          - unique
+          - not_null
+
+      - name: CATEGORY_ID
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('stg_product_categories')
+              field: CATEGORY_ID
+
+  # ==========================================
+  # ORDER ITEMS
+  # ==========================================
+  - name: stg_order_items
+    columns:
+      - name: ORDER_ITEM_ID
+        data_tests:
+          - unique
+          - not_null
+
+      - name: ORDER_ID
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('stg_orders')
+              field: ORDER_ID
+
+      - name: PRODUCT_ID
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('stg_products')
+              field: PRODUCT_ID

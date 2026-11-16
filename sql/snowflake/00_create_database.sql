@@ -1,0 +1,5 @@
+-- Create the Snowflake database
+CREATE DATABASE IF NOT EXISTS ENTERPRISE_SALES_DW;
+
+-- Verify the database exists
+SHOW DATABASES LIKE 'ENTERPRISE_SALES_DW';
